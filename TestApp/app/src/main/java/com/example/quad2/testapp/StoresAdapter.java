@@ -38,9 +38,8 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Business business;
-        business = businessList.get(position);
-
-        if (business!=null){
+        //business = businessList.get(position);
+       /* if (business!=null){
             if (business.getProfileImage()!= null){
                 String imageLink = businessList.get(position).getProfileImage();
                 Picasso.with(context)
@@ -63,12 +62,12 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
                 holder.address.setText("Address Not Available!");
             }
 
-        }
+        }*/
     }
 
     @Override
     public int getItemCount() {
-        return businessList.size();
+        return 15;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

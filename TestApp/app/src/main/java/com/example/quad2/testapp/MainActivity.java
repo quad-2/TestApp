@@ -87,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.INTERNET}, MY_PERMISSIONS_REQUEST_INTERNET);
         } else {
-            getData();
+            setStoreAdapter();
+            setCategoryAdapter();
+            //getData();
         }
     }
 
@@ -105,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getData() {
-        setCategoryAdapter();
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.readTimeout(15, TimeUnit.SECONDS);
         Retrofit retrofit = new Retrofit.Builder()
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                setStoreAdapter();
+                //setStoreAdapter();
             }
 
             @Override
