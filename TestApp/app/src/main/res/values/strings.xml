@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestApp</string>
+    <string name="activity_header">LookUp</string>
+    <string name="intro_string_1">Categories</string>
+    <string name="intro_string_2">Chat now with stores</string>
+    <string name="category_adapter_dummy_name">Categories</string>
+</resources>
