@@ -6,6 +6,8 @@
     <dimen name="category_card_height_width">60dp</dimen>
     <dimen name="store_image_height_width">50dp</dimen>
 
+    <dimen name="size_margin_10dp">10dp</dimen>
+
     <dimen name="card_modified_elevation">3dp</dimen>
 
     <dimen name="text_size_16sp">16sp</dimen>

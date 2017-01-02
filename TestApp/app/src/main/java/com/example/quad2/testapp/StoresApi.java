@@ -10,5 +10,5 @@ import retrofit2.http.GET;
 public interface StoresApi {
 
     @GET("/businesses")
-    Call<Data> getStoreList();
+    Call<Store> getStoreList();
 }

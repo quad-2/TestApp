@@ -1,7 +1,9 @@
 package com.example.quad2.testapp;
 
 import android.content.Context;
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +12,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,11 +25,13 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
 
     private Context context;
     private List<Business> businessList = new ArrayList<>();
+    private Location currentLocation;
 
 
-    public StoresAdapter(Context context, List<Business> businessList) {
+    public StoresAdapter(Context context, List<Business> businessList, Location location) {
         this.context = context;
         this.businessList = businessList;
+        this.currentLocation = location;
     }
 
     @Override
@@ -38,9 +44,9 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Business business;
-        //business = businessList.get(position);
-       /* if (business!=null){
-            if (business.getProfileImage()!= null){
+        business = businessList.get(position);
+        if (business != null) {
+            if (business.getProfileImage() != null) {
                 String imageLink = businessList.get(position).getProfileImage();
                 Picasso.with(context)
                         .load(imageLink)
@@ -49,25 +55,42 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
                         .into(holder.storeImage);
             }
 
-            if (business.getName()!=null){
+            if (business.getName() != null) {
                 holder.storeName.setText(business.getName());
-            }else {
+            } else {
                 holder.storeName.setText("Name Not Available!");
             }
 
-            if (business.getAddress()!=null){
-                holder.address.setText(business.getAddress().getLocality() + " - "+business.getAddress().getStreet() + ", " +
-                business.getAddress().getCity());
+            if (currentLocation != null) {
+                Location storeLocation = new Location("pointA");
+                List<String> location = Arrays.asList(business.getLocation().split(","));
+                storeLocation.setLatitude(Double.valueOf(location.get(0)));
+                storeLocation.setLongitude(Double.valueOf(location.get(1)));
+                double distance = currentLocation.distanceTo(storeLocation) / 1000;
+                String distanceInKM = String.format("%.2f",distance);
+
+                Log.d("log4", business.getLocation());
+                holder.distance.setText(distanceInKM + " Km");
+            }
+
+            if (business.getAddress() != null) {
+                if (business.getAddress().getStreet() != null) {
+                    holder.address.setText(business.getAddress().getLocality() + " - " + business.getAddress().getStreet() + ", " +
+                            business.getAddress().getCity());
+                } else {
+                    holder.address.setText(business.getAddress().getLocality() + ", " +
+                            business.getAddress().getCity());
+                }
+
             } else {
                 holder.address.setText("Address Not Available!");
             }
-
-        }*/
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return businessList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
