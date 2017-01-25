@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements
     private RecyclerView storeRV;
 
 
-    private static final String BASE_URL = "http://ec2-54-169-238-70.ap-southeast-1.compute.amazonaws.com:5000";
+    private static final String BASE_URL = "API_URL";
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 100;
 
     private ArrayList<String> categoryList;
